@@ -1,0 +1,18 @@
+#c'est le fichier principal du script qui permet de synchroniser les arbres
+#!/bin/bash
+
+path=`find ~ -type d -name projet_LO14`
+cd $path
+if [ $# -gt 0 ] 
+then 
+	if [ ! -d .synchro ] 
+	then
+		echo "creation du ficher de synchronisation"
+		touch .synchro
+		ls -lR $1 > .synchro
+	else 
+		echo "le fichier synchro existe deja"
+	fi
+
+fi 
+
