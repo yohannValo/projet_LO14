@@ -1,7 +1,8 @@
 arbreA:
 total 0
--rw-rw-r-- 1 yohann yohann 0 May  5 10:15 test
-drwxrwxr-x 2 yohann yohann 6 May  5 11:14 yop
+-rw-rw-r-- 1 yohann yohann  0 May  5 10:15 test
+drwxrwxr-x 2 yohann yohann 26 May  5 11:50 yop
 
 arbreA/yop:
 total 0
+-rw-rw-r-- 1 yohann yohann 0 May  5 11:50 modification
