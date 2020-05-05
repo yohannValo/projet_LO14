@@ -5,7 +5,7 @@ path=`find ~ -type d -name projet_LO14`
 cd $path
 if [ $# -gt 0 ] 
 then 
-	if [ ! -d .synchro ] 
+	if [ ! -e .synchro ] 
 	then
 		echo "creation du ficher de synchronisation"
 		touch .synchro
@@ -13,6 +13,5 @@ then
 	else 
 		echo "le fichier synchro existe deja"
 	fi
-
 fi 
 
