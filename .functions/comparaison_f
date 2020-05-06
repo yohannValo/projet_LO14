@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#fonction qui a pour but de regarder dans un repertoire courant si les fichiers ont été modifié 
+#si oui faire la synchronisation dans l'autre arbre et ecrire qu'il y a eu une modification dans le fichier journal 
+
+function fonction_comp_f {
+	for fichier in `ls -l| grep ^[^d] | awk '{print $9 }' `
+	do
+		fichier1=`ls -l | grep $fichier` #le fichier du repertoire courant stocke dans la variable $fichier
+        	fichier2=`cat $path\/.synchro | grep $fichier$` # la chaine de caractere ecrite dans le fichier .synchro 
+		
+		if [ "$fichier1" = "$fichier2" ] # on compare les deux chaines pour voir si il ya eu un changement 
+			then
+				echo " ces fichiers sont egaux"
+			else
+				echo "les fichiers ne sont pas egaux"
+		fi 
+	done
+}

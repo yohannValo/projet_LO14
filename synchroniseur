@@ -3,31 +3,30 @@
 
 path=`find ~ -type d -name projet_LO14`
 cd $path
+source $path/\.functions/comparaison_f
+source $path\/.functions/comparaison_d
 
 fileSystem1=$path/$1 #ce sont les chemin des systemes de fichier a synchroniser
 fileSystem2=$path/$2
 
 if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
 then 
-	if [ ! -e .synchro ] 
+	if [ ! -e .synchro ]
 	then
 		echo "creation du ficher de synchronisation"
 		touch .synchro
 		ls -lR $1 > .synchro
 	else 
+		if [ ! -e .modif ]
+		then
+			touch .modif 
+		fi
 		echo "le fichier synchro existe deja"
+		
 		cd $fileSystem1
-		for repertoire in `find . -type d | grep -v git | grep [^\.$] | cut -d / -f 2 ` # commande qui nous retourne la liste des repertoires dans une variable "repertoire"
-		do
-			condition1=`ls -l | grep $repertoire`
-			condition2=`cat $path\/.synchro | grep $repertoire$` 	# condition pour laquelle le repertoire associé au nom de variable $repertoire egal au log 
-			if [ "$condition1" = "$condition2" ]
-			then							#mais probleme de too many arguments dnas la ligne 24
-				echo "c egal"
-			else 
-				echo " cest pas egal"
-			fi 
-		done
+
+		fonction_comp_f
+		fonction_comp_d
 	fi
 fi 
 

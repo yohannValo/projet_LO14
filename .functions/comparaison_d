@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function fonction_comp_d {
+	for repertoire in `find . -type d | grep -v git | grep [^\.$] | cut -d / -f 2 ` # commande qui nous retourne la liste des repertoires dans une variable "repertoire"      
+	do                                                                                                                                                                        
+        	condition1=`ls -l | grep $repertoire`                                                                                                                             
+        	condition2=`cat $path\/.synchro | grep $repertoire$`    # condition pour laquelle le repertoire associé au nom de variable $repertoire egal au log                
+        	if [ "$condition1" = "$condition2" ]                                                                                                                              
+        	then                                                                                                                                                              
+                	echo "les repertoires sont egaux"                                                                                                                                             
+        	else                                                                                                                                                              
+                	echo " les repertoires ne sont pas egaux"                                                                                                                                     
+        	fi                                                                                                                                                                
+	done
+}                                                                                                                                                                      
