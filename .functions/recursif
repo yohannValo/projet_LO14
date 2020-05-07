@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function parcours() {
+if [ -d $1 ]
+then
+	cd $1
+	for i in *;
+	do
+		parcours $i
+	done
+	cd ..
+else
+	echo $1
+fi
+}
+
+parcours $1
