@@ -25,8 +25,8 @@ then
 		
 		cd $fileSystem1
 
-		fonction_comp_f
-		fonction_comp_d
+		fonction_comp_f $fileSystem2
+		fonction_comp_d $fileSystem2
 	fi
 fi 
 

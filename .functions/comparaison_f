@@ -6,12 +6,12 @@
 function fonction_comp_f {
 	for fichier in `ls -l| grep ^[^d] | awk '{print $9 }' `
 	do
-		fichier1=`ls -l | grep $fichier` #le fichier du repertoire courant stocke dans la variable $fichier
-        	fichier2=`cat $path\/.synchro | grep $fichier$` # la chaine de caractere ecrite dans le fichier .synchro 
+		fichier1=`ls -l | grep $fichier | sed 's/ *//g'` #le fichier du repertoire courant stocke dans la variable $fichier
+        	fichier2=`ls -l $1 | grep $fichier$ | sed 's/ *//g'` # la chaine de caractere ecrite dans le fichier .synchro 
 		
 		if [ "$fichier1" = "$fichier2" ] # on compare les deux chaines pour voir si il ya eu un changement 
 			then
-				echo " ces fichiers sont egaux"
+				echo "ces fichiers sont egaux"
 			else
 				echo "les fichiers ne sont pas egaux"
 		fi 
