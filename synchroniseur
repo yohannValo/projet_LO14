@@ -3,9 +3,6 @@
 
 path=`find ~ -type d -name projet_LO14`
 cd $path
-source $path/\.functions/comparaison_f
-source $path\/.functions/comparaison_d
-source $path\/.functions/recursif
 fileSystem1=$path/$1 #ce sont les chemin des systemes de fichier a synchroniser
 fileSystem2=$path/$2
 
@@ -22,7 +19,7 @@ then
 			touch .modif 
 		fi
 		echo "le fichier synchro existe deja"
-		
+		source ./.functions/recursif $fileSystem1 $2
 
 	fi
 fi 

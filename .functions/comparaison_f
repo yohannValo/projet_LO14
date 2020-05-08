@@ -4,7 +4,7 @@
 #si oui faire la synchronisation dans l'autre arbre et ecrire qu'il y a eu une modification dans le fichier journal 
 
 function fonction_comp_f {
-	file_from_other_three=`find ~ -type f -name $1 | grep -v "$2" `
+	file_from_other_three=`find ~ -type f -name $1 | grep "$2" `
 	fichier1=`ls -l | grep $1 | sed 's/ *//g'` #le fichier du repertoire courant stocke dans la variable $fichier
         fichier2=`ls -l $file_from_other_three| grep $1 | sed 's/\/.*\///' | sed 's/ *//g'`  # la chaine de caractere ecrite dans le fichier .synchro 
 		echo "$fichier1"
