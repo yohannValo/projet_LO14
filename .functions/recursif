@@ -1,17 +1,18 @@
 #!/bin/bash
-
+source ./.functions/comparaison_f
 function parcours() {
 if [ -d $1 ]
 then
 	cd $1
 	for i in *;
 	do
-		parcours $i
+		parcours $i $2
 	done
 	cd ..
 else
 	echo $1
+	fonction_comp_f $1 $2
 fi
 }
 
-parcours $1
+parcours $1 $2
