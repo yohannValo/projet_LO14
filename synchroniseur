@@ -12,7 +12,7 @@ then
 	then
 		echo "creation du ficher de synchronisation"
 		touch .synchro
-		ls -lR $1 > .synchro
+		ls -lR $1 | grep ^- > .synchro
 	else 
 		if [ ! -e .modif ]
 		then

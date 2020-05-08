@@ -1,5 +1,6 @@
 #!/bin/bash
 source ./.functions/comparaison_f
+source ./.functions/modification_f
 function parcours() {
 if [ -d $1 ]
 then
@@ -15,7 +16,7 @@ else
 	 echo "le resultat de la fonction = $?"
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then
-                echo "Les fichier sont differents"
+		modification $1 $2
         fi
 fi
 }

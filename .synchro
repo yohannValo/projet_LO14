@@ -1,8 +1,8 @@
-arbreA:
-total 0
--rw-rw-rw- 1 matthieu matthieu    0 May  5 18:16 test
-drwxrwxrwx 1 matthieu matthieu 4096 May  5 18:16 yop
-
-arbreA/yop:
-total 0
--rw-rw-rw- 1 matthieu matthieu 0 May  5 18:16 modification
+-rw-rw-r-- 1 yohann yohann  0 May  8 11:01 point
+-rw-rw-r-- 1 yohann yohann  0 May  7 09:31 test
+-rw-rw-r-- 1 yohann yohann  0 May  7 09:31 fich1
+-rw-rw-r-- 1 yohann yohann  0 May  7 09:31 fich2
+-rw-rw-r-- 1 yohann yohann 0 May  7 09:31 fich3
+-rw-rw-r-- 1 yohann yohann 0 May  7 09:31 fich4
+-rw-rw-r-- 1 yohann yohann 0 May  7 09:31 fich5
+-rw-rw-r-- 1 yohann yohann 0 May  7 09:31 fich6
