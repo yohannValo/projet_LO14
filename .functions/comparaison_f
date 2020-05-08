@@ -11,8 +11,8 @@ function fonction_comp_f {
 		echo "$fichier2"
 	if [ "$fichier1" = "$fichier2" ] # on compare les deux chaines pour voir si il ya eu un changement 
 		then
-			echo "ces fichiers sont egaux"
+			return 0
 		else
-			echo "les fichiers ne sont pas egaux"
+			return 1
 	fi 
 }

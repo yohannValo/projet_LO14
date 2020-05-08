@@ -12,6 +12,11 @@ then
 else
 	echo $1
 	fonction_comp_f $1 $2
+	 echo "le resultat de la fonction = $?"
+        if [ $? -eq 1 ] #C'est vrais = c'est different
+        then
+                echo "Les fichier sont differents"
+        fi
 fi
 }
 
