@@ -11,6 +11,11 @@ then
 	cd ..
 else
 	echo $1
+	 echo "le resultat de la fonction = $?"
+        if [ $? -eq 1 ] #C'est vrais = c'est different
+        then
+                echo "Les fichier sont differents"
+        fi
 fi
 }
 
