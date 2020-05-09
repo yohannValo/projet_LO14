@@ -1,12 +1,13 @@
 #!/bin/bash
 
 function modification(){
-path=`find ~ -type d -name .synchro`
+path=`find ~ -type f -name .synchro`
 file_from_other_three=`find ~ -type f -name $1 | grep "$2" `
 fichier1=`ls -l | grep $1 | sed 's/ *//g'`
 fichier2=`ls -l $file_from_other_three| grep $2 | sed 's/\/.*\///' | sed 's/ *//g'`
-chaine_log=`cat "$path" | grep $1 | sed 's/ *//g' `
- echo "oui$fichier1"
- echo " non$fichier2"
-echo " peut etre$chaine_log"
+chaine_log=`cat $path | grep $1 | sed 's/ *//g' `
+echo " f1 $fichier1"
+echo " f2 $fichier2"
+echo " f3 $chaine_log"
+
 }
