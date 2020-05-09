@@ -17,7 +17,19 @@ then
 	then
 		echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
 		echo "rm $file_from_tree" 
+	else
+		echo "il n'est pas dans les log, on le créer dans l'autre arbre"
 	fi
-
+else
+	echo "le fichier est présent dans les 2 arbres, on verifie si le premeir est dans les logs"
+	if [ $fichier1 = $chaine_log ]
+	then
+		echo "le premier fichier est correcpondant au log, il faut le remplacer par le fichier B"
+	elif [ $fichier2 = $chaine_log ]
+	then
+		echo "le deuxieme fichier correcspond aux logs, il faut le remplacer par le fichier A"
+	else
+		echo "il y à un conflit les 2 fichier ont été modifié"
+	fi
 fi
 }
