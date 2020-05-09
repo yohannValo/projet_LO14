@@ -3,11 +3,21 @@
 function modification(){
 path=`find ~ -type f -name .synchro`
 file_from_other_three=`find ~ -type f -name $1 | grep "$2" `
+file_from_tree=`find ~ -type f -name $1 | awk '!/$2/'`
 fichier1=`ls -l | grep $1 | sed 's/ *//g'`
 fichier2=`ls -l $file_from_other_three| grep $2 | sed 's/\/.*\///' | sed 's/ *//g'`
-chaine_log=`cat $path | grep $1 | sed 's/ *//g' `
+chaine_log=`cat $path | grep $1 | sed 's/ *//g'`
 echo " f1 $fichier1"
 echo " f2 $fichier2"
 echo " f3 $chaine_log"
+if [ "$fichier2" = "" ]
+then
+	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
+	if [ $fichier1 = $chaine_log ]
+	then
+		echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
+		echo "rm $file_from_tree" 
+	fi
 
+fi
 }

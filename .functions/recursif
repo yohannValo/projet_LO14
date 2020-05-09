@@ -15,7 +15,6 @@ else
 	fonction_comp_f $1 $2
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then
-		echo "poi"
 		modification $1 $2
         fi
 fi
