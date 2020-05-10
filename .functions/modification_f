@@ -10,6 +10,7 @@ chaine_log=`cat $path | grep $1 | sed 's/ *//g'`
 echo " f1 $fichier1"
 echo " f2 $fichier2"
 echo " f3 $chaine_log"
+
 if [ "$fichier2" = "" ]
 then
 	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
@@ -19,11 +20,21 @@ then
 		echo "rm $file_from_tree" 
 	else
 		echo "il n'est pas dans les log, on le créer dans l'autre arbre"
+		#path_of_new_file=`find ~ -type f -name $1 | sed "s/$1/$2/g"` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
+		# cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
 	fi
 else
 	echo "le fichier est présent dans les 2 arbres, on verifie si le premeir est dans les logs"
 	if [ $fichier1 = $chaine_log ]
 	then
+		chaine_mod1=`ls -l $file_from_other_three| grep $1 | cut -c 2-10` # permet d avoir la chaine de caractere representant les droits du fichier de l arbre pas courant
+		chaine_mod2=`$chaine_log |cut -c 2-10` # permet d avoir la chaine de caractere representant les droits du fichier dans les logs 
+
+		if [$chaine_mod1 != $chaine_mod2 ]# si ces chaines sont differentes alors on sait qu on doit appliquer les droit de fichier 2 a fichier1
+		then
+			chmod --reference=$file_from_other_tree file $file_from_tree # commande qui permet de copier les droits d un fichier et de les appliquer a un autre fichier
+		fi
+
 		echo "le premier fichier est correcpondant au log, il faut le remplacer par le fichier B"
 	elif [ $fichier2 = $chaine_log ]
 	then
