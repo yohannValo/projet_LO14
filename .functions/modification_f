@@ -14,7 +14,7 @@ chaine_log=`cat $path | grep $1 | sed 's/ *//g'`
 if [ "$fichier2" = "" ]
 then
 #	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
-	if [ $fichier1 = $chaine_log ]
+	if [[ $fichier1 = $chaine_log ]]
 	then
 #		echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
 		rm $file_from_tree
