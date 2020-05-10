@@ -10,7 +10,11 @@ if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg
 then 
 	if [ ! -e .synchro ]
 	then
-		echo "creation du ficher de synchronisation"
+		cd $2
+		rm -rf
+		cd ..
+		cp -pr $1 $2
+		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
 		touch .synchro
 		ls -lR $1 | grep ^- > .synchro
 	else 
