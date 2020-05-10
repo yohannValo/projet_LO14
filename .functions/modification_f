@@ -18,15 +18,15 @@ then
 	then
 #		echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
 		rm $file_from_tree
-		dir_vide=`find ~ -type f -name $1 | awk '!/$2/'| sed 's/point//g'
-		if [ ! `find $dir_vide -mindepth 1 | read` ]
-		then
-   			rm $dir_vide
-		fi
+		#dir_vide=`find ~ -type f -name $1 | awk '!/$2/'| sed 's/point//g' `
+		#if [ ! `find $dir_vide -mindepth 1 | read` ]
+		#then
+   		#	rmdir $dir_vide
+		#fi
 		 
 	else
-#		echo "il n'est pas dans les log, on le créer dans l'autre arbre"
-		path_of_new_file=`find ~ -type f -name $1 | sed "s/$1/$2/g"` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
+#		echo "il n'est pas dans les log, on le créer dans lautre arbre"
+		path_of_new_file=`find ~ -type f -name $1 | sed 's/arbreA/arbreB/g' ` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
 		cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
 	fi
 else

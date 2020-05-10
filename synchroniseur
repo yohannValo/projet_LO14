@@ -10,9 +10,7 @@ if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg
 then 
 	if [ ! -e .synchro ]
 	then
-		cd $2
-		rm -rf
-		cd ..
+		rm -rf $2
 		cp -pr $1 $2
 		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
 		touch .synchro
@@ -24,7 +22,9 @@ then
 		fi
 		echo "le fichier synchro existe deja"
 		source ./.functions/recursif $fileSystem1 $2
-
+		cd `find ~ -type d -name projet_LO14`
+		ls -lR $1 | grep ^- > .synchro
+#		source ./.functions/recursif $fileSystem2 $1
 	fi
 fi 
 
