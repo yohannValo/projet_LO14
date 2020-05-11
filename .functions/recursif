@@ -11,7 +11,9 @@ then
 	done
 	cd ..
 else
-#	echo $1
+	echo $1
+	fonction_comp_f $1 $2
+	echo "$?"
 	fonction_comp_f $1 $2
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then

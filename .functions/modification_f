@@ -31,11 +31,11 @@ then
 	fi
 else
 #	echo "le fichier est présent dans les 2 arbres, on verifie si le premeir est dans les logs"
-	if [ $fichier1 = $chaine_log ]
+	if [[ $fichier1 = $chaine_log ]]
 	then
 		cp -p $file_from_other_tree $file_from_tree
 #		echo "le premier fichier est correcpondant au log, il faut le remplacer par le fichier B\non a copier $file_from_other_tree vers $file_from_tree"
-	elif [ $fichier2 = $chaine_log ]
+	elif [[ $fichier2 = $chaine_log ]]
 	then
 		cp -p $file_from_tree $file_from_other_tree
 #		echo "le deuxieme fichier correcspond aux logs, il faut le remplacer par le fichier A"
