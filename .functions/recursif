@@ -7,7 +7,7 @@ then
 	cd $1
 	for i in *;
 	do
-		parcours $i $2
+		parcours $i $2 $3 $4
 	done
 	cd ..
 else
@@ -15,9 +15,9 @@ else
 	fonction_comp_f $1 $2
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then
-		modification $1 $2
+		modification $1 $2 $3 $4
         fi
 fi
 }
 
-parcours $1 $2
+parcours $1 $2 $3 $4

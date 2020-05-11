@@ -21,10 +21,11 @@ then
 			touch .modif 
 		fi
 		echo "le fichier synchro existe deja"
-		source ./.functions/recursif $fileSystem1 $2
+		source ./.functions/recursif $fileSystem1 $2 $1 $2
+		cd `find ~ -type d -name projet_LO14`
+		source ./.functions/recursif $fileSystem2 $1 $2 $1
 		cd `find ~ -type d -name projet_LO14`
 		ls -lR $1 | grep ^- > .synchro
-#		source ./.functions/recursif $fileSystem2 $1
 	fi
 fi 
 
