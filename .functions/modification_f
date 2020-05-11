@@ -16,7 +16,7 @@ then
 #	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
 	if [[ $fichier1 = $chaine_log ]]
 	then
-#		echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
+		echo "il est dans les log $1, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
 		rm $file_from_tree
 		#dir_vide=`find ~ -type f -name $1 | awk '!/$2/'| sed 's/point//g' `
 		#if [ ! `find $dir_vide -mindepth 1 | read` ]
@@ -27,6 +27,8 @@ then
 	else
 		echo "il n'est pas dans les log $1, on le créer dans lautre arbre"
 		path_of_new_file=`find ~ -type f -name $1 | sed 's/'$3'/'$4'/g' ` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
+		path_of_new_dir=`find ~ -type f -name $1 | sed 's/'$3'/'$4'/g' | sed 's/\/'$1'//g'`
+		mkdir $path_of_new_dir
 		cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
 	fi
 else
