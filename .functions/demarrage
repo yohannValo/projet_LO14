@@ -1,0 +1,25 @@
+echo -e "
+   _______     ___   _  _____ _    _ _____   ____  _   _ _____  _____ ______ _    _ _____  
+  / ____\ \   / / \ | |/ ____| |  | |  __ \ / __ \| \ | |_   _|/ ____|  ____| |  | |  __ \ 
+ | (___  \ \_/ /|  \| | |    | |__| | |__) | |  | |  \| | | | | (___ | |__  | |  | | |__) |
+  \___ \  \   / | .   | |    |  __  |  _  /| |  | | .   | | |  \___ \|  __| | |  | |  _  / 
+  ____) |  | |  | |\  | |____| |  | | | \ \| |__| | |\  |_| |_ ____) | |____| |__| | | \ \ 
+ |_____/   |_|  |_| \_|\_____|_|  |_|_|  \_\ ____/|_| \_|_____|_____/|______|\____/|_|  \_\\"
+
+echo -e " bienvenue dans la commande de synchronisation des systemes de fichiers\n
+quels sont les repertoires que vous voulez synchroniser (chemin absolu)"
+echo -e "premier repertoire :\n"
+read chemin1
+sudo echo "$chemin1" > /etc/.arbre1
+echo -e "second repertoire :\n"
+read chemin2
+sudo echo "$chemin2" > /etc/.arbre2 
+if [ ! -d $chemin1 ]
+then
+	mkdir $chemin1
+fi
+if [ ! -d $chemin2 ]  
+then                  
+        mkdir $chemin2
+fi                    
+                      

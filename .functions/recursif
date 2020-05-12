@@ -1,25 +1,27 @@
 #!/bin/bash
-source ./.functions/modification_f
-source ./.functions/comparaison_f
+source /etc/.functions/modification_f
+source /etc/.functions/comparaison_f
 function parcours() {
 if [ -d $1 ]
 then
 	cd $1
 	for i in *;
 	do
-		parcours $i $2 $3 $4
+		parcours $i $2 
 	done
 	cd ..
 else
+	file_from_tree=`find ~ -type f -name $1 | grep -v "$2"`
+	file_from_other_tree=`find ~ -type f -name $1 | grep $2`	
 	echo $1
 	fonction_comp_f $1 $2
 	echo "$?"
 	fonction_comp_f $1 $2
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then
-		modification $1 $2 $3 $4
+		modification $1 $2 
         fi
 fi
 }
 
-parcours $1 $2 $3 $4
+parcours $1 $2

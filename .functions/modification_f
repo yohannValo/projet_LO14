@@ -2,10 +2,10 @@
 
 function modification(){
 path=`find ~ -type f -name .synchro`
-file_from_tree=`find ~ -type f -name $1 | grep -v "$2"`
-file_from_other_tree=`find ~ -type f -name $1 | grep $2`
-fichier1=`ls -l | grep $1 | sed 's/ *//g'`
-fichier2=`ls -l $file_from_other_tree| grep $2 | sed 's/\/.*\///' | sed 's/ *//g'`
+#file_from_tree=`find ~ -type f -name $1 | grep -v "$2"`
+#file_from_other_tree=`find ~ -type f -name $1 | grep $2`
+#fichier1=`ls -l | grep $1 | sed 's/ *//g'`
+#fichier2=`ls -l $file_from_other_tree| grep $2 | sed 's/\/.*\///' | sed 's/ *//g'`
 chaine_log=`cat $path | grep $1 | sed 's/ *//g'`
 #echo " f1 $fichier1"
 #echo " f2 $fichier2"
@@ -26,8 +26,8 @@ then
 		 
 	else
 		echo "il n'est pas dans les log $1, on le créer dans lautre arbre"
-		path_of_new_file=`find ~ -type f -name $1 | sed 's/'$3'/'$4'/g' ` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
-		path_of_new_dir=`find ~ -type f -name $1 | sed 's/'$3'/'$4'/g' | sed 's/\/'$1'//g'`
+		path_of_new_file=`echo "$file_from_tree" | sed 's/'$chemin1'/'$chemin2'/g' ` #cette variable permet de determiner le chemin ou le fichier devra etre copier 
+		path_of_new_dir=`echo "$file_from_tree" | sed 's/'$chemin1'/'$chemin2'/g' | sed 's/\/'$1'//g'`
 		mkdir $path_of_new_dir
 		cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
 	fi

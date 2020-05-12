@@ -1,31 +1,26 @@
 #c'est le fichier principal du script qui permet de synchroniser les arbres
 #!/bin/bash
 
-path=`find ~ -type d -name projet_LO14`
-cd $path
-fileSystem1=$path/$1 #ce sont les chemin des systemes de fichier a synchroniser
-fileSystem2=$path/$2
-
-if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
+if [ $# -ge 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
 then 
-	if [ ! -e .synchro ]
+	if [ ! -e /etc/.functions/.synchro ]
 	then
-		rm -rf $2
-		cp -pr $1 $2
+		fonction=`find / -type d -name .functions 2>/dev/null`
+               	sudo mv $fonction /etc/
+		sudo touch /etc/.functions/.arbre1
+		sudo touch /etc/.functions/.arbre2
+	        source /etc/.functions/demarrage	 
+		sudo cp -pr $chemin1 $chemin2
 		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
-		touch .synchro
-		ls -lR $1 | grep ^- > .synchro
+		sudo touch /etc/.functions/.synchro
+		sudo ls -lR $chemin1 | grep ^- > /etc/.functions/.synchro
 	else 
-		if [ ! -e .modif ]
-		then
-			touch .modif 
-		fi
+		chemin1=`cat /etc/.functions/.arbre1`
+		chemin2=`cat /etc/.functions/.arbre1`
 		echo "le fichier synchro existe deja"
-		source ./.functions/recursif $fileSystem1 $2 $1 $2
-		cd `find ~ -type d -name projet_LO14`
-		source ./.functions/recursif $fileSystem2 $1 $2 $1
-		cd `find ~ -type d -name projet_LO14`
-		ls -lR $1 | grep ^- > .synchro
+		source /etc/.functions/recursif $chemin1 $chemin2
+		source /etc/.functions/recursif $chemin2 $chemin1
+		ls -lR $chemin1 | grep ^- > /etc/.functions/.synchro
 	fi
 fi 
 
