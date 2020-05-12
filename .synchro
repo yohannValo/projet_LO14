@@ -1,8 +1,0 @@
-arbreA:
-total 0
--rw-rw-rw- 1 matthieu matthieu    0 May  5 18:16 test
-drwxrwxrwx 1 matthieu matthieu 4096 May  5 18:16 yop
-
-arbreA/yop:
-total 0
--rw-rw-rw- 1 matthieu matthieu 0 May  5 18:16 modification

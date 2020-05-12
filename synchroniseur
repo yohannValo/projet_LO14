@@ -3,9 +3,6 @@
 
 path=`find ~ -type d -name projet_LO14`
 cd $path
-source $path/\.functions/comparaison_f
-source $path\/.functions/comparaison_d
-
 fileSystem1=$path/$1 #ce sont les chemin des systemes de fichier a synchroniser
 fileSystem2=$path/$2
 
@@ -13,20 +10,22 @@ if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg
 then 
 	if [ ! -e .synchro ]
 	then
-		echo "creation du ficher de synchronisation"
+		rm -rf $2
+		cp -pr $1 $2
+		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
 		touch .synchro
-		ls -lR $1 > .synchro
+		ls -lR $1 | grep ^- > .synchro
 	else 
 		if [ ! -e .modif ]
 		then
 			touch .modif 
 		fi
 		echo "le fichier synchro existe deja"
-		
-		cd $fileSystem1
-
-		fonction_comp_f $fileSystem2
-		fonction_comp_d $fileSystem2
+		source ./.functions/recursif $fileSystem1 $2 $1 $2
+		cd `find ~ -type d -name projet_LO14`
+		source ./.functions/recursif $fileSystem2 $1 $2 $1
+		cd `find ~ -type d -name projet_LO14`
+		ls -lR $1 | grep ^- > .synchro
 	fi
 fi 
 

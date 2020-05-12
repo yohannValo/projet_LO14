@@ -1,22 +1,27 @@
 #!/bin/bash
-
+source ./.functions/modification_f
+source ./.functions/comparaison_f
 function parcours() {
 if [ -d $1 ]
 then
 	cd $1
 	for i in *;
 	do
-		parcours $i
+		parcours $i $2 $3 $4
 	done
 	cd ..
 else
 	echo $1
-	 echo "le resultat de la fonction = $?"
+
+	fonction_comp_f $1 $2
+	echo "$?"
+	fonction_comp_f $1 $2
         if [ $? -eq 1 ] #C'est vrais = c'est different
         then
-                echo "Les fichier sont differents"
+		modification $1 $2 $3 $4
+
         fi
 fi
 }
 
-parcours $1
+parcours $1 $2 $3 $4
