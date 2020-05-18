@@ -21,5 +21,7 @@ then
 	else
 		echo "le fichier synchro existe deja"
 		source ./.functions/recursif $fileSystem1 $fileSystem2
+		source ./.functions/recursif $fileSystem2 $fileSystem1
+		ls -lR $fileSystem1 | grep ^- > $fichierLog
 	fi
 fi

@@ -12,12 +12,12 @@ function modification() {
 	fi
 
 	fichier1=`ls -l $file_from_tree | sed 's/ *//g' | cut -d/ -f1`
-	fichier2=`ls -l $file_from_other_tree | sed 's/ *//g' | cut -d/ -f1`
-	fichierLog=`cat $fichierLog | grep $name | sed "s|$name||g" | sed 's/ *//g'`
+	fichier2=`ls -l $file_from_other_tree 2>/dev/null | sed 's/ *//g' | cut -d/ -f1`
+	chaine_log=`cat $fichierLog | grep $name | sed "s|$name||g" | sed 's/ *//g'`
 
-	echo $fichier1
-	echo $fichier2
-	echo $fichierLog
+#	echo $fichier1
+#	echo $fichier2
+#	echo $chaine_log
 
 	
 	if [ "$fichier2" = "" ]
@@ -37,7 +37,7 @@ function modification() {
 			echo "il n'est pas dans les log, on le créer dans lautre arbre"
 			path_of_new_file=$file_from_other_tree #cette variable permet de determiner le chemin ou le fichier devra etre copier 
 			path_of_new_dir=`echo $file_from_other_tree | sed 's/\/'$name'//g'`
-			mkdir $path_of_new_dir
+			mkdir $path_of_new_dir 2>/dev/null
 			cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
 		fi
 	else
