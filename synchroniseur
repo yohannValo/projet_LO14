@@ -1,0 +1,31 @@
+#c'est le fichier principal du script qui permet de synchroniser les arbres
+#!/bin/bash
+
+path=`find ~ -type d -name projet_LO14`
+cd $path
+fileSystem1=$path/$1 #ce sont les chemin des systemes de fichier a synchroniser
+fileSystem2=$path/$2
+
+if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
+then 
+	if [ ! -e .synchro ]
+	then
+		rm -rf $2
+		cp -pr $1 $2
+		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
+		touch .synchro
+		ls -lR $1 | grep ^- > .synchro
+	else 
+		if [ ! -e .modif ]
+		then
+			touch .modif 
+		fi
+		echo "le fichier synchro existe deja"
+		source ./.functions/recursif $fileSystem1 $2 $1 $2
+		cd `find ~ -type d -name projet_LO14`
+		source ./.functions/recursif $fileSystem2 $1 $2 $1
+		cd `find ~ -type d -name projet_LO14`
+		ls -lR $1 | grep ^- > .synchro
+	fi
+fi 
+
