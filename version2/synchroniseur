@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SCRIPT=`realpath -s $0`
+SCRIPTPATH=`dirname $SCRIPT`
+fichierLog=$SCRIPTPATH/.log
+
+fileSystem1=$SCRIPTPATH/$1
+fileSystem2=$SCRIPTPATH/$2
+
+cd $SCRIPTPATH
+
+if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
+then
+	if [ ! -e $fichierLog ]
+	then 
+		rm -rf $fileSystem2
+		cp -pr $fileSystem1 $fileSystem2
+		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
+		touch .log
+		ls -lR $fileSystem1 | grep ^- > $fichierLog
+	else
+		echo "le fichier synchro existe deja"
+		source ./.functions/recursif $fileSystem1 $fileSystem2
+	fi
+fi

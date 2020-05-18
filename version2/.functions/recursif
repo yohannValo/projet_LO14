@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source $SCRIPTPATH/.functions/modification_f
+source $SCRIPTPATH/.functions/comparaison_f
+
+function parcours() {
+if [ -d $1 ]
+then
+	cd $1
+	for i in *;
+	do
+		name=$i
+		chemin=$1/$i
+		parcours $chemin $2
+	done
+	cd ..
+else
+	fonction_comp_f $1 $2
+	if [ $? -eq 1 ]
+	then
+		echo $chemin
+		modification $chemin
+	fi
+fi
+}
+
+parcours $1 $2
