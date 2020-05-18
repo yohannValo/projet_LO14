@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function fonction_comp_f {
+	
+	courant=`pwd`
+	if [[ $courant =~ $fileSystem1 ]]
+	then
+		file_from_other_tree=`echo $1 | sed "s|$fileSystem1|$fileSystem2|g"`
+	else
+		file_from_other_tree=`echo $1 | sed "s|$fileSystem2|$fileSystem1|g"`
+	fi
+	
+	fichier1=`ls -l $1 | sed 's/ *//g' | cut -d/ -f1`
+	fichier2=`ls -l $file_from_other_tree | sed 's/ *//g' | cut -d/ -f1`
+
+	if [[ $fichier1 = $fichier2 ]]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
