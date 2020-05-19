@@ -11,11 +11,11 @@ then
 	do
 		name=$i
 		chemin=$1/$i
-		parcours $chemin $2
+		parcours $chemin
 	done
 	cd ..
 else
-	fonction_comp_f $1 $2
+	fonction_comp_f $1
 	if [ $? -eq 1 ]
 	then
 		echo $chemin
@@ -24,4 +24,4 @@ else
 fi
 }
 
-parcours $1 $2
+parcours $1

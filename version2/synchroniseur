@@ -11,7 +11,7 @@ cd $SCRIPTPATH
 
 if [ $# -gt 0 ] && [ $# -lt 4 ] # si on a entre 1 et 3 arguments sachant que arg0 = le script
 then
-	if [ ! -e $fichierLog ]
+	if [[ ! -e $fichierLog && $fileSystem2 =~ /home ]]
 	then 
 		rm -rf $fileSystem2
 		cp -pr $fileSystem1 $fileSystem2
@@ -20,8 +20,8 @@ then
 		ls -lR $fileSystem1 | grep ^- > $fichierLog
 	else
 		echo "le fichier synchro existe deja"
-		source ./.functions/recursif $fileSystem1 $fileSystem2
-		source ./.functions/recursif $fileSystem2 $fileSystem1
+		source ./.functions/recursif $fileSystem1
+		source ./.functions/recursif $fileSystem2
 		ls -lR $fileSystem1 | grep ^- > $fichierLog
 	fi
 fi
