@@ -25,14 +25,16 @@ function modification() {
 	#	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
 		if [[ $fichier1 = $chaine_log ]]
 		then
-			echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
+#			echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
+			dir_vide=`echo $file_from_tree | sed "s|/$i||g" `
 			rm $file_from_tree
-			#dir_vide=`find ~ -type f -name $1 | awk '!/$2/'| sed 's/point//g' `
-			#if [ ! `find $dir_vide -mindepth 1 | read` ]
-			#then
-   			#	rmdir $dir_vide
-			#fi
-		 
+			dir_vide_other_tree=`echo $file_from_other_tree | sed "s|$i||g" `
+			echo "saucisson $dir_vide $dir_vide_other_tree"
+			find $dir_vide_other_tree 2>/dev/null
+			if [ $? = 1 ]
+			then 
+			rmdir $dir_vide
+		 	fi
 		else
 			echo "il n'est pas dans les log, on le créer dans lautre arbre"
 			path_of_new_file=$file_from_other_tree #cette variable permet de determiner le chemin ou le fichier devra etre copier 
