@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function modification_d() {
+	
+	dir_from_tree=$chemin
+
+	if [[ $dir_from_tree =~ $fileSystem1 ]]
+	then
+		dir_from_other_tree=`echo $dir_from_tree | sed "s|$fileSystem1|$fileSystem2|g"` 
+	else
+		dir_from_other_tree=`echo $dir_from_tree | sed "s|$fileSystem2|$fileSystem1|g"`
+	fi
+	
+	chaine_log=`cat $fichierLog | grep $name`
+	#On doit calquer l'arbre qui correspond au log sur l'autre
+	if [ "$chaine_log" = "" ]
+	then
+		cp -Rp $dir_from_tree $dir_from_other_tree
+	else
+		rm -rf $dir_from_tree
+	fi
+}

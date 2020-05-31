@@ -1,0 +1,13 @@
+#!/bin/bash
+cd arbreA
+mkdir U1
+cd U1
+mkdir U2
+cd U2
+mkdir U3
+cd U3
+touch titi
+cd ../../../../arbreB
+mkdir U1
+cd U1
+mkdir U2
