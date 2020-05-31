@@ -2,23 +2,32 @@
 
 source $SCRIPTPATH/.functions/modification_f
 source $SCRIPTPATH/.functions/comparaison_f
+source $SCRIPTPATH/.functions/modification_d
 
 function parcours() {
 if [ -d $1 ]
 then
-	cd $1
-	for i in *;
-	do
-		name=$i
-		chemin=$1/$i
-		parcours $chemin
-	done
-	cd ..
+	fonction_comp_d $1
+	if [ $? -eq 1 ]
+	then
+		modification_d $chemin
+	else
+		cd $1
+		for i in *;
+		do
+			if [ "$i" != "*" ]
+			then
+				name=$i
+				chemin=$1/$i
+				parcours $chemin
+			fi
+		done
+		cd ..
+	fi
 else
 	fonction_comp_f $1
 	if [ $? -eq 1 ]
 	then
-		echo $chemin
 		modification $chemin
 	fi
 fi

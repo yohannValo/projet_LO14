@@ -18,6 +18,7 @@ then
 		echo "creation du ficher de synchronisation et mise a niveau des deux arbres "
 		touch .log
 		ls -lR $fileSystem1 | grep ^- > $fichierLog
+		ls -lR $fileSystem1 | grep ^d >> $fichierLog
 		echo "#1 $fileSystem1" >> $fichierLog
 		echo "#2 $fileSystem2" >> $fichierLog
 	else
@@ -25,6 +26,7 @@ then
 		source ./.functions/recursif $fileSystem1
 		source ./.functions/recursif $fileSystem2
 		ls -lR $fileSystem1 | grep ^- > $fichierLog
+		ls -lR $fileSystem1 | grep ^d >> $fichierLog
 		echo "#1 $fileSystem1" >> $fichierLog
 		echo "#2 $fileSystem2" >> $fichierLog
 	fi
@@ -37,8 +39,10 @@ then
 		fileSystem1=`cat $fichierLog | grep "#1" | sed 's/#1 //'`
 		fileSystem2=`cat $fichierLog | grep "#2" | sed 's/#2 //'`
 		source ./.functions/recursif $fileSystem1
+		cd $SCRIPTPATH
 		source ./.functions/recursif $fileSystem2
 		ls -lR $fileSystem1 | grep ^- > $fichierLog
+		ls -lR $fileSystem1 | grep ^d >> $fichierLog
 		echo "#1 $fileSystem1" >> $fichierLog
 		echo "#2 $fileSystem2" >> $fichierLog	
 	fi

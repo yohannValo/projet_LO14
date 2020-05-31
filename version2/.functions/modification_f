@@ -14,52 +14,26 @@ function modification() {
 	fichier1=`ls -l $file_from_tree | sed 's/ *//g' | cut -d/ -f1`
 	fichier2=`ls -l $file_from_other_tree 2>/dev/null | sed 's/ *//g' | cut -d/ -f1`
 	chaine_log=`cat $fichierLog | grep $name | sed "s|$name||g" | sed 's/ *//g'`
-
-#	echo $fichier1
-#	echo $fichier2
-#	echo $chaine_log
-
 	
 	if [ "$fichier2" = "" ]
 	then
-	#	echo "le fichier n'est pas présent dans l'autre arbre, on verifie si il est dans les logs"
 		if [[ $fichier1 = $chaine_log ]]
 		then
-#			echo "il est dans les log, il à été supprimé dans l'autre Arbre, on le supprime dans cet arbre"
 			dir_vide=`echo $file_from_tree | sed "s|/$i||g" `
 			rm $file_from_tree
-			dir_vide_other_tree=`echo $file_from_other_tree | sed "s|/$i||g" `
-#			echo " $dir_vide $dir_vide_other_tree"
-			find $dir_vide_other_tree 2>/dev/null
-			while [ $? = 1 ]
-			do
-				
-				rmdir $dir_vide 2>/dev/null
-				cd ..
-				echo "lfkvjdjv"
-				dir_name_other_tree=`echo $dir_vide_other_tree | rev | cut -d / -f 1 | rev`
-				dir_vide_other_tree=` echo $dir_vide_other_tree | sed "s|$dir_name_other_tree||g"`
-				dir_name_tree=`echo $dir_vide | rev | cut -d / -f 1 | rev`
-                        	dir_vide=` echo $dir_vide | sed "s|$dir_name_tree||g"`
-				find $dir_vide_other_tree 2>/dev/null
-		 	done
 		else
-			echo "il n'est pas dans les log, on le créer dans lautre arbre"
 			path_of_new_file=$file_from_other_tree #cette variable permet de determiner le chemin ou le fichier devra etre copier 
 			path_of_new_dir=`echo $file_from_other_tree | sed 's/\/'$name'//g'`
 			mkdir $path_of_new_dir 2>/dev/null
-			cp -p $file_from_tree $path_of_new_file # loption -p de cp permet de conserver les metadonnée d fichier d origine 
+			cp -p $file_from_tree $path_of_new_file # l'option -p de cp permet de conserver les metadonnée d fichier d origine 
 		fi
 	else
-	#	echo "le fichier est présent dans les 2 arbres, on verifie si le premeir est dans les logs"
 		if [[ $fichier1 = $chaine_log ]]
 		then
 			cp -p $file_from_other_tree $file_from_tree
-	#		echo "le premier fichier est correcpondant au log, il faut le remplacer par le fichier B\non a copier $file_from_other_tree vers $file_from_tree"
 		elif [[ $fichier2 = $chaine_log ]]
 		then
 			cp -p $file_from_tree $file_from_other_tree
-	#		echo "le deuxieme fichier correcspond aux logs, il faut le remplacer par le fichier A"
 		else
 			
 			echo -e "il y à un conflit les fichier: \n1)$file_from_tree  \n2)$file_from_other_tree\nont été modifié lequel voulez vous garder\n"
