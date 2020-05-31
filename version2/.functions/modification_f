@@ -19,12 +19,9 @@ function modification() {
 	then
 		if [[ $fichier1 = $chaine_log ]]
 		then
-			dir_vide=`echo $file_from_tree | sed "s|/$i||g" `
 			rm $file_from_tree
 		else
 			path_of_new_file=$file_from_other_tree #cette variable permet de determiner le chemin ou le fichier devra etre copier 
-			path_of_new_dir=`echo $file_from_other_tree | sed 's/\/'$name'//g'`
-			mkdir $path_of_new_dir 2>/dev/null
 			cp -p $file_from_tree $path_of_new_file # l'option -p de cp permet de conserver les metadonnée d fichier d origine 
 		fi
 	else

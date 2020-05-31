@@ -12,7 +12,7 @@ function modification_d() {
 	fi
 	
 	chaine_log=`cat $fichierLog | grep $name`
-	#On doit calquer l'arbre qui correspond au log sur l'autre
+	#On doit calquer l'arbre qui correspond aux logs sur l'autre
 	if [ "$chaine_log" = "" ]
 	then
 		cp -Rp $dir_from_tree $dir_from_other_tree
